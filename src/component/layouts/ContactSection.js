@@ -12,7 +12,7 @@ const ContactSection = () => {
     },
   ];
   return (
-    <section className="!font-space-grotesk  page-section bg-gradient-to-r from-pink-200 to-blue-100 py-5">
+    <section className="!font-space-grotesk   page-section py-5">
       <div className="container px-4 bg-white/90 rounded-lg p-5 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>

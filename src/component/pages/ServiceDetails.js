@@ -73,12 +73,14 @@ const ServiceDetails = () => {
   return (
     <div className="min-h-screen flex flex-col font-space-grotesk">
       <main className="flex-grow">
-        <section className="bg-gradient-to-r from-pink-200 to-blue-100 pt-36 pb-14 shadow-md">
+        <section className="bg-[url('https://images.pexels.com/photos/3875130/pexels-photo-3875130.jpeg?auto=compress&cs=tinysrgb&w=600')] pt-36 pb-14 shadow-md">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-extrabold mb-4 text-pink-700 drop-shadow">
+            <h1 className="text-4xl font-bold mb-4 w-fit mx-auto p-3 shadow-2xl bg-slate-100/70 rounded-lg  text-pink-500 drop-shadow">
               {service.name}
             </h1>
-            <p className="text-gray-700 max-w-2xl mx-auto">{service.intro}</p>
+            <p className="text-gray-700 shadow-lg w-fit mx-auto p-4 max-w-[70%] bg-slate-100/70 rounded-lg  mb-8">
+              {service.intro}
+            </p>
           </div>
         </section>
 

@@ -62,7 +62,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         size="icon"
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="h-8 w-8"
+        className="!h-8 !w-8"
       >
         <ChevronRight className="h-4 w-4" />
         <span className="sr-only">Next page</span>

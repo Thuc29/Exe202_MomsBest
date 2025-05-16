@@ -37,8 +37,8 @@ const TestimonialSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="page-section py-10 bg-gradient-to-r from-pink-200 to-blue-100 font-space-grotesk">
-      <div className="container mx-auto px-4 md:px-6 bg-white rounded-xl shadow-md py-10">
+    <section className="page-section py-10  font-space-grotesk">
+      <div className="container mx-auto px-4 md:px-6 bg-white/70 rounded-xl shadow-md py-10">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-pink-600 mb-4">
             Khách hàng nói gì về chúng tôi

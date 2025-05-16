@@ -15,9 +15,12 @@ import NotFound from "./component/pages/NotFound";
 import Products from "./component/pages/Products";
 import ServiceBaby from "./component/pages/ServiceBaby";
 import ServiceDetails from "./component/pages/ServiceDetails";
+import ScrollToTop from "./component/ScrollTop";
+import Booking from "./component/pages/Booking";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -26,6 +29,7 @@ function App() {
         <Route path="/services/details" element={<ServiceDetails />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/booking" element={<Booking />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

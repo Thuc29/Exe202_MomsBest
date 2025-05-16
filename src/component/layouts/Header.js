@@ -31,7 +31,7 @@ const Header = () => {
     {
       title: language === "vi" ? "Trang chủ" : "Home",
       path: "/",
-      icon: <Home className="text-pink-400" />,
+      icon: <Home className="text-pink-200" />,
     },
     {
       title: language === "vi" ? "Dịch vụ" : "Services",

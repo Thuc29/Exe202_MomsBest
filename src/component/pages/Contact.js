@@ -15,16 +15,16 @@ const Contact = () => {
     },
   ];
   return (
-    <div className="min-h-screen  flex flex-co font-space-grotesk">
+    <div className="min-h-screen bg-cover bg-center bg-[url('https://images.pexels.com/photos/3270224/pexels-photo-3270224.jpeg?auto=compress&cs=tinysrgb&w=600')] flex flex-co font-space-grotesk">
       <main className="flex-grow">
         {/* Hero section */}
-        <section className="bg-gradient-to-r from-pink-200 to-blue-100 pt-36 shadow-md">
+        <section className=" pt-36 ">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto text-center">
-              <h1 className="text-4xl font-extrabold mb-4 text-pink-700 drop-shadow">
+              <h1 className="text-4xl font-bold mb-4 w-fit mx-auto px-4 shadow-2xl bg-slate-100/70 rounded-lg  text-pink-500 drop-shadow">
                 Liên hệ với chúng tôi
               </h1>
-              <p className="text-gray-700 mb-0">
+              <p className="text-gray-500 shadow-lg w-fit mx-auto px-4 bg-slate-100/70 rounded-lg  mb-8">
                 Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn.
               </p>
             </div>
@@ -32,7 +32,7 @@ const Contact = () => {
         </section>
 
         {/* Contact information */}
-        <section className="page-section bg-gradient-to-r from-pink-200 to-blue-100 py-10">
+        <section className="page-section shadow-xl text-black  py-10">
           <div className="container px-4 bg-white/30 rounded-lg p-5 md:px-6">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
@@ -40,7 +40,7 @@ const Contact = () => {
                   words={words}
                   className=" items-center justify-center"
                 />
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-800 mb-6">
                   Điền thông tin của bạn và chúng tôi sẽ liên hệ với bạn để đặt
                   lịch hẹn với bác sĩ.
                 </p>

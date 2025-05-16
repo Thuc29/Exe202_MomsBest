@@ -7,7 +7,7 @@ import FeatureProduct from "../layouts/FeatureProduct";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-inherit bg-center bg-[url('https://images.pexels.com/photos/3845407/pexels-photo-3845407.jpeg?auto=compress&cs=tinysrgb&w=600')]">
       <main className="flex-grow">
         <Hero />
         <ServiceSection />
