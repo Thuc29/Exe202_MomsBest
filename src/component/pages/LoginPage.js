@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary">
+    <div className="min-h-screen flex items-center justify-center font-space-grotesk text-black bg-primary">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-md">
         <div className="text-center">
           <h1 className="text-2xl font-bold">ĐĂNG NHẬP</h1>

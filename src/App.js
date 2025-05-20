@@ -7,33 +7,46 @@ import {
 
 import Header from "./component/layouts/Header";
 import Footer from "./component/layouts/Footer";
-import ServiceMother from "./component/pages/ServiceMother";
-import Doctors from "./component/pages/Doctors";
-import Contact from "./component/pages/Contact";
 import HomePage from "./component/pages/HomePage";
 import NotFound from "./component/pages/NotFound";
 import Products from "./component/pages/Products";
-import ServiceBaby from "./component/pages/ServiceBaby";
-import ServiceDetails from "./component/pages/ServiceDetails";
+import Blog from "./component/pages/Blog";
 import ScrollToTop from "./component/ScrollTop";
-import Booking from "./component/pages/Booking";
+import Forum from "./component/pages/Forum";
+import ThreadDetail from "./component/pages/ThreadDetail";
+import Library from "./component/pages/Library";
+import ArticleDetail from "./component/pages/ArticleDetail";
+import ProductDetail from "./component/pages/ProductDetail";
+import Checkout from "./component/pages/Checkout";
+import { CartProvider } from "./component/context/CartContext";
+import LoginPage from "./component/pages/LoginPage";
+import ProfilePage from "./component/pages/ProfilePage";
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/services/mother" element={<ServiceMother />} />
-        <Route path="/services/baby" element={<ServiceBaby />} />
-        <Route path="/services/details" element={<ServiceDetails />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/forum/thread/:threadId" element={<ThreadDetail />} />
+          <Route path="/forum/library" element={<Library />} />
+          <Route
+            path="/forum/library/article/:articleId"
+            element={<ArticleDetail />}
+          />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

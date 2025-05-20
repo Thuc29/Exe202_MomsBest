@@ -218,6 +218,9 @@ const experts = [
   },
 ];
 
+const getThreadCount = (categoryName) =>
+  threads.filter((thread) => thread.category === categoryName).length;
+
 const Forum = () => {
   const [activeTab, setActiveTab] = useState("categories");
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -265,7 +268,7 @@ const Forum = () => {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-[url('https://images.pexels.com/photos/6714078/pexels-photo-6714078.jpeg?auto=compress&cs=tinysrgb&w=600')] flex flex-col font-space-grotesk">
+    <div className="min-h-screen bg-cover bg-center bg-[url('https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=600')] flex flex-col font-space-grotesk">
       {/* Hero Section */}
       <section className="pt-24 pb-8">
         <div className="container mx-auto px-4">
@@ -330,16 +333,17 @@ const Forum = () => {
                   >
                     Chuyên gia
                   </button>
-                  <button
-                    onClick={() => setActiveTab("library")}
+                  <Link
+                    to="/forum/library"
                     className={`flex-1 py-3 text-center font-medium transition ${
-                      activeTab === "library"
+                      window.location.pathname === "/library"
                         ? "bg-pink-500 text-white"
                         : "bg-white text-gray-600 hover:bg-pink-50"
                     }`}
+                    style={{ display: "block" }}
                   >
                     Thư viện
-                  </button>
+                  </Link>
                 </div>
               </div>
 
@@ -348,7 +352,7 @@ const Forum = () => {
                 <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                   <Filter size={18} /> Sắp xếp chủ đề
                 </h2>
-                <div className="space-y-2">
+                <div className="space-y-2 text-black">
                   <label className="flex items-center cursor-pointer">
                     <input
                       type="radio"
@@ -433,15 +437,29 @@ const Forum = () => {
                             onClick={() => setSelectedCategory(null)}
                             className="text-blue-500 hover:text-blue-700 mb-2 flex items-center gap-1"
                           >
-                            ← Quay lại danh sách chuyên mục
+                            ← Quay lại chuyên mục
                           </button>
-                          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                            <span>{selectedCategory.icon}</span>
-                            {selectedCategory.name}
-                          </h2>
-                          <p className="text-gray-600">
-                            {selectedCategory.description}
-                          </p>
+                          <div className="flex items-center gap-4 mb-4">
+                            <span
+                              className={`text-4xl p-4 rounded-full shadow ${selectedCategory.color}`}
+                            >
+                              {selectedCategory.icon}
+                            </span>
+                            <div>
+                              <h2 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                                {selectedCategory.name}
+                              </h2>
+                              <p className="text-gray-600 text-lg">
+                                {selectedCategory.description}
+                              </p>
+                              <div className="flex gap-4 mt-2 text-sm text-gray-500">
+                                <span>
+                                  {getThreadCount(selectedCategory.name)} chủ đề
+                                </span>
+                                {/* Có thể thêm số lượng bài viết nếu có */}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <button
                           onClick={() => setShowNewThreadModal(true)}
@@ -533,30 +551,39 @@ const Forum = () => {
                             animate="visible"
                             exit="exit"
                             transition={{ duration: 0.3 }}
-                            className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden cursor-pointer"
-                            onClick={() => setSelectedCategory(category)}
+                            className={`relative bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden cursor-pointer border-2 border-transparent hover:border-pink-400 group`}
                           >
-                            <div className="p-5">
-                              <div className="flex items-center gap-3 mb-3">
+                            <div className="p-5 flex flex-col h-full">
+                              <div className="flex items-center gap-4 mb-3">
                                 <span
-                                  className={`text-2xl p-2 rounded-full ${category.color}`}
+                                  className={`text-3xl p-3 rounded-full shadow ${category.color} transition-transform group-hover:scale-110`}
                                 >
                                   {category.icon}
                                 </span>
-                                <h3 className="text-xl font-semibold text-gray-800">
-                                  {category.name}
-                                </h3>
+                                <div>
+                                  <h3 className="text-xl font-bold text-gray-800 group-hover:text-pink-600 transition">
+                                    {category.name}
+                                  </h3>
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-gray-500 text-sm">
+                                      {getThreadCount(category.name)} chủ đề
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
-                              <p className="text-gray-600 text-sm mb-4">
-                                {category.description}
-                              </p>
-                              <div className="flex justify-between items-center">
-                                <span className="text-gray-500 text-sm">
-                                  {category.threads} chủ đề
-                                </span>
-                                <span className="text-pink-500 hover:text-pink-700 text-sm font-medium">
+                              <div className="flex  items-center">
+                                <p className="text-gray-600 justify-start truncate text-sm flex-1 group-hover:text-gray-800 transition">
+                                  {category.description}
+                                </p>
+                                <button
+                                  className="text-pink-500 justify-end hover:text-pink-700 text-sm font-medium"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedCategory(category);
+                                  }}
+                                >
                                   Xem tất cả →
-                                </span>
+                                </button>
                               </div>
                             </div>
                           </motion.div>
@@ -613,7 +640,7 @@ const Forum = () => {
                         <label className="block text-gray-700 text-sm font-medium mb-2">
                           Chọn chuyên gia
                         </label>
-                        <select className="w-full p-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-300 outline-none">
+                        <select className="w-full p-3 text-black bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-300 outline-none">
                           <option value="">Chọn chuyên gia phù hợp</option>
                           {experts.map((expert) => (
                             <option key={expert.id} value={expert.id}>
@@ -715,14 +742,7 @@ const Forum = () => {
           </div>
         </div>
       </section>
-      {/* Footer */}
-      <footer className="bg-white/80 backdrop-blur-sm py-6">
-        <div className="container mx-auto text-center">
-          <p className="text-gray-600">
-            © 2025 Diễn đàn Mẹ và Bé. All rights reserved.
-          </p>
-        </div>
-      </footer>
+
       {/* New Thread Modal */}
       <AnimatePresence>
         {showNewThreadModal && (

@@ -18,11 +18,15 @@ import {
 } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
+import CartModal from "../pages/CartModal";
+import { useCart } from "../context/CartContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [language, setLanguage] = useState("vi");
+  const [showCartModal, setShowCartModal] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleLanguage = () => setLanguage(language === "vi" ? "en" : "vi");
@@ -34,41 +38,32 @@ const Header = () => {
       icon: <Home className="text-pink-200" />,
     },
     {
-      title: language === "vi" ? "Dịch vụ" : "Services",
-      icon: (
-        <LocalHospital className="w-6 h-6 text-orange-500 bg-orange-100 rounded-full p-1" />
-      ),
-      subMenu: [
-        {
-          title: language === "vi" ? "MẸ" : "MOM",
-          path: "/services/mother",
-          icon: <PregnantWoman className="w-5 h-5 text-pink-500" />,
-        },
-        {
-          title: language === "vi" ? "BÉ" : "BABY",
-          path: "/services/baby",
-          icon: <ChildCare className="w-5 h-5 text-blue-500" />,
-        },
-      ],
+      title: language === "vi" ? "Diễn đàn" : "Forum",
+      path: "/forum",
+      icon: <PregnantWoman className="w-5 h-5 text-pink-500" />,
     },
     {
       title: language === "vi" ? "Sản phẩm" : "Products",
       path: "/products",
       icon: <Category className="text-blue-400" />,
     },
+
     {
-      title: language === "vi" ? "Liên hệ" : "Contact",
-      path: "/contact",
-      icon: <ContactMail className="text-green-400" />,
+      title: language === "vi" ? "Blog" : "Blog",
+      path: "/blog",
+      icon: <EventAvailable className="text-purple-400" />,
     },
     {
-      title: language === "vi" ? "ĐẶT LỊCH" : "BOOK NOW",
-      path: "/booking",
-      icon: <EventAvailable className="text-purple-400" />,
+      title: language === "vi" ? "Cá nhân" : "Personal",
+      path: "/profile",
+      icon: <ContactMail className="text-green-400" />,
     },
   ];
 
   const location = useLocation();
+
+  const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <header className="fixed top-0 z-50 w-full bg-transparent shadow-sm font-space-grotesk">
@@ -179,13 +174,15 @@ const Header = () => {
             })}
           </div>
           <div className="hidden md:flex items-center p-2 bg-white/90 shadow-xl rounded-full gap-2">
-            <Button
-              variant="outlined"
-              className="!rounded-full !font-space-grotesk !border  !border-pink-600/70 !bg-pink-100 !text-pink-600 px-3 py-1 text-sm font-medium hover:!bg-pink-200 transition-colors whitespace-nowrap flex items-center gap-2"
-            >
-              <AccountCircle className="w-5 h-5" />
-              {language === "vi" ? "Đăng nhập" : "SignIn"}
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="outlined"
+                className="!rounded-full !font-space-grotesk !border  !border-pink-600/70 !bg-pink-100 !text-pink-600 px-3 py-1 text-sm font-medium hover:!bg-pink-200 transition-colors whitespace-nowrap flex items-center gap-2"
+              >
+                <AccountCircle className="w-5 h-5" />
+                {language === "vi" ? "Đăng nhập" : "SignIn"}
+              </Button>
+            </Link>
 
             <Button
               variant="outlined"
@@ -200,6 +197,16 @@ const Header = () => {
               className="!text-sm !font-medium !font-space-grotesk  !text-gray-600 hover:!text-pink-400 !p-1"
             >
               {language === "vi" ? "EN" : "VI"}
+            </Button>
+            <Button
+              className="!rounded-full !p-2 !bg-pink-100 !text-pink-600 hover:!bg-pink-200 relative"
+              style={{ minWidth: 0 }}
+              onClick={() => setShowCartModal(true)}
+            >
+              <ShoppingCart size={22} />
+              <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
+                {totalItems}
+              </span>
             </Button>
           </div>
           <div className="flex items-center gap-2 md:hidden">
@@ -289,13 +296,15 @@ const Header = () => {
             ))}
 
             {/* Nút đăng nhập / đăng ký */}
-            <Button
-              variant="outlined"
-              className="!rounded-full !font-space-grotesk  !border-pink-400 !text-pink-400 !px-4 !py-1 !text-sm !font-medium hover:!bg-pink-400 hover:!text-white !transition-all !duration-300 flex items-center justify-center gap-2 w-full"
-            >
-              <AccountCircle className="w-5 h-5" />
-              {language === "vi" ? "Đăng nhập" : "SignIn"}
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="outlined"
+                className="!rounded-full !font-space-grotesk  !border-pink-400 !text-pink-400 !px-4 !py-1 !text-sm !font-medium hover:!bg-pink-400 hover:!text-white !transition-all !duration-300 flex items-center justify-center gap-2 w-full"
+              >
+                <AccountCircle className="w-5 h-5" />
+                {language === "vi" ? "Đăng nhập" : "SignIn"}
+              </Button>
+            </Link>
             <Button
               variant="outlined"
               className="!rounded-full !font-space-grotesk !bg-blue-400 !text-white !px-4 !py-1 !text-sm !font-medium hover:!bg-white hover:!text-blue-500 hover:!border-blue-500 !transition-all !flex !items-center !justify-center gap-2 w-full"
@@ -303,9 +312,24 @@ const Header = () => {
               <PersonAdd className="w-5 h-5" />
               {language === "vi" ? "Đăng ký" : "Signup"}
             </Button>
+            <Button
+              className="!rounded-full !p-2 !bg-pink-100 !text-pink-600 hover:!bg-pink-200 relative"
+              style={{ minWidth: 0 }}
+              onClick={() => setShowCartModal(true)}
+            >
+              <ShoppingCart size={22} />
+              <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
+                {totalItems}
+              </span>
+            </Button>
           </div>
         )}
       </Container>
+      <CartModal
+        open={showCartModal}
+        onClose={() => setShowCartModal(false)}
+        cart={cart}
+      />
     </header>
   );
 };
