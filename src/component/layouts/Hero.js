@@ -35,15 +35,15 @@ export default function Hero() {
                 transition={{ duration: 0.7 }}
                 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white mb-6"
               >
-                Sức khỏe{" "}
+                Diễn đàn{" "}
                 <span className="inline-block">
                   <RotatingText
                     texts={[
-                      "tốt nhất",
-                      "toàn diện",
-                      "tối ưu",
-                      "bền vững",
-                      "hiệu quả",
+                      "trao đổi",
+                      "chia sẻ",
+                      "học hỏi",
+                      "kết nối",
+                      "phát triển",
                     ]}
                     mainClassName="p-1 bg-cyan-200 text-pink-500 overflow-hidden justify-center rounded-lg"
                     staggerFrom="last"
@@ -56,7 +56,7 @@ export default function Hero() {
                     rotationInterval={3500}
                   />
                 </span>{" "}
-                cho mẹ và bé
+                kinh nghiệm
               </motion.h1>
 
               <motion.p
@@ -65,9 +65,9 @@ export default function Hero() {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8"
               >
-                Chúng tôi cung cấp dịch vụ chăm sóc sức khỏe toàn diện cho mẹ và
-                bé với đội ngũ bác sĩ giàu kinh nghiệm và trang thiết bị hiện
-                đại.
+                Nơi mọi người cùng nhau chia sẻ kinh nghiệm, thảo luận và học
+                hỏi về mọi lĩnh vực trong cuộc sống. Tham gia cộng đồng để kết
+                nối và phát triển bản thân mỗi ngày!
               </motion.p>
 
               <motion.div
@@ -81,7 +81,7 @@ export default function Hero() {
                   color="cyan"
                   speed="5s"
                 >
-                  <Link to={"/services/mother"}>Khám phá dịch vụ </Link>
+                  <Link to={"/forum"}>Khám phá diễn đàn</Link>
                 </StarButton>
 
                 <Button
@@ -90,7 +90,7 @@ export default function Hero() {
                   size="default"
                   asChild
                 >
-                  <Link to="/contact">Liên hệ ngay</Link>
+                  <Link to="/contact">Tham gia ngay</Link>
                 </Button>
               </motion.div>
             </div>

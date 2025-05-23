@@ -134,7 +134,7 @@ const NotiIcon = () => (
 // Component con cho từng tab
 function MyPostsTab() {
   return (
-    <div>
+    <div className="">
       <h4 className="font-semibold mb-4 flex items-center text-lg">
         <PostIcon />
         Bài viết của tôi
@@ -369,140 +369,146 @@ function ProfilePage() {
   };
 
   return (
-    <div className="max-w-4xl text-black mx-auto p-4">
-      {/* Thông tin cá nhân */}
-      <div className="flex flex-col sm:flex-row items-center gap-6 mb-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl shadow-lg p-6 relative">
-        <div className="relative group">
-          <img
-            src={user.avatar}
-            alt="avatar"
-            className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-blue-200 shadow-lg transition-transform group-hover:scale-105"
-          />
-          <button
-            className="absolute bottom-2 right-2 bg-blue-500 text-white rounded-full p-2 shadow-lg hover:bg-blue-600 transition"
-            onClick={() => setShowEditModal(true)}
-            title="Chỉnh sửa thông tin"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5"
+    <div className=" text-black pt-16 mx-auto bg-cover font-space-grotesk bg-[url('https://images.pexels.com/photos/1157389/pexels-photo-1157389.jpeg?auto=compress&cs=tinysrgb&w=600')] p-4">
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        {/* Thông tin cá nhân */}
+        <div className="flex flex-col sm:flex-row items-center gap-6 mb-8 bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl shadow-lg p-6 relative">
+          <div className="relative group">
+            <img
+              src={user.avatar}
+              alt="avatar"
+              className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-blue-200 shadow-lg transition-transform group-hover:scale-105"
+            />
+            <button
+              className="absolute bottom-2 right-2 bg-blue-500 text-white rounded-full p-2 shadow-lg hover:bg-blue-600 transition"
+              onClick={() => setShowEditModal(true)}
+              title="Chỉnh sửa thông tin"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.862 4.487a2.1 2.1 0 1 1 2.97 2.97L7.5 19.788l-4 1 1-4 12.362-12.3z"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.862 4.487a2.1 2.1 0 1 1 2.97 2.97L7.5 19.788l-4 1 1-4 12.362-12.3z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h2 className="text-2xl font-bold mb-1 text-blue-700">
+              {user.name}
+            </h2>
+            <p className="text-gray-600 mb-2">{user.email}</p>
+            <span className="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
+              Thành viên
+            </span>
+          </div>
         </div>
-        <div className="flex-1 text-center sm:text-left">
-          <h2 className="text-2xl font-bold mb-1 text-blue-700">{user.name}</h2>
-          <p className="text-gray-600 mb-2">{user.email}</p>
-          <span className="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
-            Thành viên
-          </span>
-        </div>
-      </div>
 
-      {/* Tabs */}
-      <div className="flex gap-2 border-b-2 border-blue-100 mb-6">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            className={`px-5 py-2 font-semibold border-b-4 transition-all duration-200 rounded-t-lg focus:outline-none text-base
+        {/* Tabs */}
+        <div className="flex gap-2 border-b-2 border-blue-100 mb-6">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              className={`px-5 py-2 font-semibold border-b-4 transition-all duration-200 rounded-t-lg focus:outline-none text-base
               ${
                 activeTab === tab.key
                   ? "border-blue-500 text-blue-700 bg-white shadow"
                   : "border-transparent text-gray-500 hover:text-blue-500 hover:bg-blue-50"
               }
             `}
-            onClick={() => setActiveTab(tab.key)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Nội dung từng tab */}
-      <div className="bg-white rounded-xl shadow p-6 min-h-[220px]">
-        {activeTab === "posts" && <MyPostsTab />}
-        {activeTab === "questions" && <MyQuestionsTab />}
-        {activeTab === "orders" && <MyOrdersTab />}
-        {activeTab === "reviews" && <MyReviewsTab />}
-        {activeTab === "notifications" && <NotificationSettingsTab />}
-      </div>
-
-      {/* Modal chỉnh sửa thông tin */}
-      {showEditModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm transition-opacity"></div>
-          <div className="relative bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md animate-fadeIn">
-            <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
-              onClick={() => setShowEditModal(false)}
+              onClick={() => setActiveTab(tab.key)}
             >
-              &times;
+              {tab.label}
             </button>
-            <h3 className="text-xl font-bold mb-6 text-blue-700">
-              Chỉnh sửa thông tin cá nhân
-            </h3>
-            <form onSubmit={handleEditSubmit} className="space-y-5">
-              <div className="flex flex-col items-center gap-2 mb-4">
-                <img
-                  src={editData.avatar}
-                  alt="avatar preview"
-                  className="w-20 h-20 rounded-full object-cover border-2 border-blue-200 shadow"
-                />
-                <span className="text-xs text-gray-400">
-                  Xem trước ảnh đại diện
-                </span>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Tên</label>
-                <Input
-                  name="name"
-                  value={editData.name}
-                  onChange={handleEditChange}
-                  placeholder="Nhập tên của bạn"
-                  className="bg-blue-50"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <Input
-                  name="email"
-                  value={editData.email}
-                  onChange={handleEditChange}
-                  placeholder="Nhập email"
-                  className="bg-blue-50"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Ảnh đại diện (URL)
-                </label>
-                <Input
-                  name="avatar"
-                  value={editData.avatar}
-                  onChange={handleEditChange}
-                  placeholder="Dán link ảnh đại diện"
-                  className="bg-blue-50"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
-              >
-                Lưu thay đổi
-              </button>
-            </form>
-          </div>
+          ))}
         </div>
-      )}
+
+        {/* Nội dung từng tab */}
+        <div className="bg-white rounded-xl shadow p-6 min-h-[220px]">
+          {activeTab === "posts" && <MyPostsTab />}
+          {activeTab === "questions" && <MyQuestionsTab />}
+          {activeTab === "orders" && <MyOrdersTab />}
+          {activeTab === "reviews" && <MyReviewsTab />}
+          {activeTab === "notifications" && <NotificationSettingsTab />}
+        </div>
+
+        {/* Modal chỉnh sửa thông tin */}
+        {showEditModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm transition-opacity"></div>
+            <div className="relative bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md animate-fadeIn">
+              <button
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
+                onClick={() => setShowEditModal(false)}
+              >
+                &times;
+              </button>
+              <h3 className="text-xl font-bold mb-6 text-blue-700">
+                Chỉnh sửa thông tin cá nhân
+              </h3>
+              <form onSubmit={handleEditSubmit} className="space-y-5">
+                <div className="flex flex-col items-center gap-2 mb-4">
+                  <img
+                    src={editData.avatar}
+                    alt="avatar preview"
+                    className="w-20 h-20 rounded-full object-cover border-2 border-blue-200 shadow"
+                  />
+                  <span className="text-xs text-gray-400">
+                    Xem trước ảnh đại diện
+                  </span>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Tên</label>
+                  <Input
+                    name="name"
+                    value={editData.name}
+                    onChange={handleEditChange}
+                    placeholder="Nhập tên của bạn"
+                    className="bg-blue-50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Email
+                  </label>
+                  <Input
+                    name="email"
+                    value={editData.email}
+                    onChange={handleEditChange}
+                    placeholder="Nhập email"
+                    className="bg-blue-50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Ảnh đại diện (URL)
+                  </label>
+                  <Input
+                    name="avatar"
+                    value={editData.avatar}
+                    onChange={handleEditChange}
+                    placeholder="Dán link ảnh đại diện"
+                    className="bg-blue-50"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                >
+                  Lưu thay đổi
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+      </main>
     </div>
   );
 }

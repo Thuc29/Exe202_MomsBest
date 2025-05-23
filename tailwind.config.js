@@ -121,6 +121,19 @@ module.exports = {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+        bounce: {
+          "0%, 100%": {
+            transform: "translateY(-25%)",
+            animationTimingFunction: "cubic-bezier(0.8,0,1,1)",
+          },
+          "50%": {
+            transform: "none",
+            animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
+          },
+        },
+        spin: {
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -133,6 +146,8 @@ module.exports = {
         "slide-in-bottom": "slide-in-bottom 0.5s ease-out",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        bounce: "bounce 1s infinite",
+        spin: "spin 1s linear infinite",
       },
       fontFamily: {
         "space-grotesk": ["Space Grotesk", "sans-serif"],
@@ -175,17 +190,6 @@ module.exports = {
       card: {
         DEFAULT: "hsl(var(--card))",
         foreground: "hsl(var(--card-foreground))",
-      },
-    },
-
-    keyframes: {
-      "accordion-down": {
-        from: { height: "0" },
-        to: { height: "var(--radix-accordion-content-height)" },
-      },
-      "accordion-up": {
-        from: { height: "var(--radix-accordion-content-height)" },
-        to: { height: "0" },
       },
     },
   },

@@ -21,6 +21,9 @@ import Checkout from "./component/pages/Checkout";
 import { CartProvider } from "./component/context/CartContext";
 import LoginPage from "./component/pages/LoginPage";
 import ProfilePage from "./component/pages/ProfilePage";
+import ChatbotButton from "./component/ui/ChatbotButton";
+import ScrollToTopButton from "./component/ui/ScrollToTopButton";
+
 function App() {
   return (
     <CartProvider>
@@ -45,6 +48,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <ChatbotButton />
+        <ScrollToTopButton />
       </BrowserRouter>
     </CartProvider>
   );
